@@ -1,4 +1,4 @@
-name: Java CI
+name: Java Maven CI
 
 on:
   push:
@@ -11,13 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Cloner le dépôt
       - uses: actions/checkout@v3
 
+      # 2. Installer Java
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: temurin   # <-- obligatoire !
+          distribution: temurin
           java-version: '17'
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      # 3. Build le projet avec Maven
+      - name: Build with Maven
+        run: mvn clean install
